@@ -1,16 +1,20 @@
 'use strict';
 
-/*
-// console.log(document.querySelector('.message').textContent);
-document.querySelector('.message').textContent = 'Start guessing...';
+// Texto da pagina
 
-document.querySelector('.number').textContent = 13;
+document.querySelector('.title').textContent = 'Adivinhe meu número!';
 
-document.querySelector('.score').textContent = 20;
+document.querySelector('.between').textContent = '(Entre 1 e 20)';
 
-document.querySelector('.guess').value = 23;
-console.log(document.querySelector('.guess').value);
-*/
+document.querySelector('.again').textContent = 'Again';
+
+document.querySelector('.number').textContent = '?';
+
+document.querySelector('.check').textContent = 'Check!';
+
+document.querySelector('.message').textContent = 'Comece a adivinhar...';
+
+// Lógica do jogo
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highScore = 0;
@@ -20,11 +24,11 @@ document.querySelector('.check').addEventListener('click', function () {
   console.log(guess, typeof guess);
 
   if (!guess) {
-    document.querySelector('.message').textContent = '⛔ No number';
+    document.querySelector('.message').textContent = '⛔ Sem número!';
 
-    // When playeres wins
+    // Quando o jogador vence
   } else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = '🎉Correct Number!';
+    document.querySelector('.message').textContent = '🎉Número Correto!';
 
     document.querySelector('.number').textContent = secretNumber;
 
@@ -36,54 +40,30 @@ document.querySelector('.check').addEventListener('click', function () {
       highScore = score;
       document.querySelector('.highscore').textContent = highScore;
     }
-    // when guess wrong
+    // Quando o jogador adivinha errado
   } else if (guess !== secretNumber) {
     if (score > 1) {
       document.querySelector('.message').textContent =
-        guess > secretNumber ? '📈 Too high!' : '📉 Too low!';
+        guess > secretNumber ? '📈 Chutou alto!' : '📉 Chutou baixo!';
       score--;
 
       document.querySelector('.score').textContent = score;
+
+      //Quando o jogador perde
     } else {
-      document.querySelector('.message').textContent = '💥 You lost the game!';
+      document.querySelector('.message').textContent = '💥 Você perdeu!';
       document.querySelector('.score').textContent = 0;
 
       document.querySelector('body').style.backgroundColor = '#ff0000';
     }
   }
-  //When is too high
-  /*else if (guess > secretNumber) {
-    if (score > 1) {
-      document.querySelector('.message').textContent = '📈 Too high!';
-      score--;
-
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.message').textContent = '💥 You lost the game!';
-      document.querySelector('.score').textContent = 0;
-
-      document.querySelector('body').style.backgroundColor = '#ff0000';
-    }
-    //When is too low
-  } else if (guess < secretNumber) {
-    if (score > 1) {
-      document.querySelector('.message').textContent = '📉 Too low!';
-      score--;
-      document.querySelector('.score').textContent = score;
-    } else {
-      document.querySelector('.message').textContent = '💥 You lost the game!';
-      document.querySelector('.score').textContent = 0;
-
-      document.querySelector('body').style.backgroundColor = '#ff0000';
-    }
-  }*/
 });
 
 document.querySelector('.again').addEventListener('click', function () {
   score = 20;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
 
-  document.querySelector('.message').textContent = 'Stat guessing...';
+  document.querySelector('.message').textContent = 'Comece a adivinhar...';
 
   document.querySelector('.score').textContent = score;
 
@@ -95,17 +75,3 @@ document.querySelector('.again').addEventListener('click', function () {
 
   document.querySelector('.number').style.with = '15rem';
 });
-
-///////////////////////////////////////
-// Coding Challenge #1
-
-/* 
-Implement a game rest functionality, so that the player can make a new guess! Here is how:
-
-1. Select the element with the 'again' class and attach a click event handler
-2. In the handler function, restore initial values of the score and secretNumber variables
-3. Restore the initial conditions of the message, number, score and guess input field
-4. Also restore the original background color (#222) and number width (15rem)
-
-GOOD LUCK 😀
-*/
